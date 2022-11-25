@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
@@ -49,6 +50,7 @@ builder.Services.Configure<JwtOptions>(
         builder.Configuration.GetSection(nameof(JwtOptions)));
 var jwtOptions = new JwtOptions();
 builder.Configuration.Bind(nameof(jwtOptions), jwtOptions);
+builder.Services.Configure<AzureStorageOptions>(builder.Configuration.GetSection(nameof(AzureStorageOptions)));
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(name: "CorsPolicy",
