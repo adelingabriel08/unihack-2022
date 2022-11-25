@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Unihack.Core.Contracts;
+using Unihack.Core.Requests;
 
 namespace Unihack.API.Controllers
 {
     [ApiController]
-    [Route("stolenitem")]
+    [Route("stolenitems")]
     public class StolenItemController : ControllerBase
     {
         private readonly IStolenItemService _itemService;
@@ -28,6 +30,19 @@ namespace Unihack.API.Controllers
             if (item is null) return NotFound();
 
             return Ok(item);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> AddStolenItem(AddStolenItemRequest request)
+        {
+            return Ok(await _itemService.AddStolenItem(request));
+        }
+
+        [HttpGet("types")]
+        public async Task<IActionResult> GetStolenItemTypes()
+        {
+            return Ok(await _itemService.GetTypes());
         }
     }
 }

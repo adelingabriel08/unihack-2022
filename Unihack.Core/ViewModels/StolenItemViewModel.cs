@@ -9,6 +9,7 @@ namespace Unihack.Core.ViewModels
 {
     public class StolenItemViewModel
     {
+        public int Id { get; set; }
         public string Title { get; set; }
         public int StolenItemTypeId { get; set; }
         public string SerialNumber { get; set; }
