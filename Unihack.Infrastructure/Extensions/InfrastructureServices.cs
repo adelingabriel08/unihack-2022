@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Unihack.Infrastructure.Database;
 using Unihack.Infrastructure.Entities;
+using Unihack.Infrastructure.Repositories;
 
 namespace Unihack.Infrastructure.Extensions
 {
@@ -14,6 +15,7 @@ namespace Unihack.Infrastructure.Extensions
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             return services;
         }
     }

@@ -11,6 +11,7 @@ namespace Unihack.Core.Extensions
         {
             services.AddInfrastructureServices(connectionString);
             services.AddScoped<IIdentityService, IdentityService>();
+            services.AddScoped<IStolenItemService, StolenItemService>();
             return services;
         }
     }
