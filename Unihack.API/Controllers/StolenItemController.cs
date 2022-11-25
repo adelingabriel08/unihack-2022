@@ -4,7 +4,7 @@ using Unihack.Core.Contracts;
 namespace Unihack.API.Controllers
 {
     [ApiController]
-    [Route("stolen")]
+    [Route("stolenitem")]
     public class StolenItemController : ControllerBase
     {
         private readonly IStolenItemService _itemService;
