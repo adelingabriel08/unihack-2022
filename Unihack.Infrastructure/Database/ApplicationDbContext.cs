@@ -10,5 +10,8 @@ namespace Unihack.Infrastructure.Database
             : base(options)
         {
         }
+
+        public DbSet<StolenItem> StolenItems { get; set; }
+        public DbSet<StolenItemType> StolenItemTypes { get; set; }
     }
 }
