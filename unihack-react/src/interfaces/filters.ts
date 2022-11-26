@@ -1,4 +1,9 @@
 export interface IFilterProperties {
   name: string;
-  options?: string[];
+  options?: IFilterOption[];
+}
+
+export interface IFilterOption {
+  name: string;
+  id: number;
 }

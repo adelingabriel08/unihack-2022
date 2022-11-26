@@ -5,8 +5,13 @@ import Home from "./home";
 import { CssBaseline } from "@mui/material";
 import theme from "./theme";
 import Layout from "../components/layout";
+import ItemPage from "./item";
+import AddItemPage from "./addItem";
+import { checkIfLoggedIn } from "../helpers/auth-helpers";
 
 function App() {
+  const isLoggedIn = checkIfLoggedIn();
+
   return (
     <BrowserRouter>
       <Routes>
@@ -22,6 +27,11 @@ function App() {
           <Route index element={<Home />} />
 
           <Route path="*" element={<Navigate to="/" />} />
+          <Route path="item/:id" element={<ItemPage />} />
+          <Route
+            path="add/item"
+            element={isLoggedIn ? <AddItemPage /> : <Navigate to="/" />}
+          />
         </Route>
       </Routes>
     </BrowserRouter>

@@ -9,7 +9,7 @@ const styles = (): Record<string, SxProps | undefined> => ({
     padding: 0,
     margin: 0,
     overflow: "hidden",
-    bgcolor: "#C7E5F1",
+    bgcolor: "#F2F4F5",
   },
   baseScreen: {
     width: "75%",

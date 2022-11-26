@@ -75,6 +75,11 @@ const Header = () => {
             <Grid item sx={classes.link}>
               <Link to="/">Contact</Link>
             </Grid>
+            {username && (
+              <Grid item sx={classes.link}>
+                <Link to="/add/item">Adauga Obiect Furat</Link>
+              </Grid>
+            )}
           </Grid>
           <Grid item xs={3} container spacing={2} justifyContent="flex-end">
             <Grid item sx={classes.button}>

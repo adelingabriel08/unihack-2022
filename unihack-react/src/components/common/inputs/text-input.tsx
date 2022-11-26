@@ -1,53 +1,36 @@
 import React from "react";
 import TextField from "@mui/material/TextField";
-import { SxProps } from "@mui/material";
+import { MenuItem } from "@mui/material";
 
-const styles = (): Record<string, SxProps | undefined> => ({
-  textInput: {
-    borderRadius: "3px",
-    fontSize: "16px",
-    backgroundColor: "white",
-    alignItems: "flex-start",
-    padding: 0,
-    height: "100%",
-    "& textarea": {
-      height: "99px",
-      padding: "10px",
-    },
-    "&.Mui-focused fieldset": {
-      border: "1px solid #00ABAD",
-      boxShadow: "0 0 4px 0 #00ABADCC",
-    },
-    "& input::placeholder": {
-      opacity: 1,
-      color: "#909090",
-    },
-  },
-  hide: {
-    display: "none",
-  },
-  marginRight: {
-    marginRight: "15px",
-  },
-});
-
-interface IInputFormProps {
+interface ITextInputProps {
   type: string;
   register?: any;
   name: string;
+  isRequired?: boolean;
+  rows: number;
   onChange?: (value: any) => any;
   defaultValue?: string;
+  selectValues?: string[];
 }
 
-const TextInput: React.FC<IInputFormProps> = (props) => {
-  const { type, register, name, onChange, defaultValue } = props;
-  const classes = styles();
+const TextInput: React.FC<ITextInputProps> = (props) => {
+  const {
+    type,
+    register,
+    name,
+    rows,
+    onChange,
+    defaultValue,
+    isRequired,
+    selectValues,
+  } = props;
 
   const handleChange = (event: { target: { value: any } }) => {
     if (onChange) {
       onChange(event.target.value);
     }
   };
+  console.log(selectValues);
 
   return (
     <TextField
@@ -58,10 +41,9 @@ const TextInput: React.FC<IInputFormProps> = (props) => {
       fullWidth
       placeholder={name}
       type={type}
+      multiline={rows > 1}
       onChange={handleChange}
-      InputProps={{
-        classes: { root: classes.textInput },
-      }}
+      required={isRequired}
     />
   );
 };

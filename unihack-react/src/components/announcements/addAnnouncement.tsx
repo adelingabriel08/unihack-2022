@@ -1,0 +1,146 @@
+import { Box, Button, Grid } from "@mui/material";
+import react, { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { IFilterOption, IItem } from "../../interfaces";
+import { getStolenItemCategories } from "../../utils/api-service";
+import SelectInput from "../common/inputs/select-input";
+import TextInput from "../common/inputs/text-input";
+
+const AddAnnouncement = () => {
+  const { register, handleSubmit, reset } = useForm<IItem>({
+    mode: "all",
+  });
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [categories, setCategories] = useState<IFilterOption[]>([]);
+  const onSubmit = async (data: IItem) => {
+    try {
+      console.log(data);
+      console.log(selectedCategory);
+    } catch (e: any) {
+      console.log(e);
+    }
+    reset();
+  };
+
+  const handleCategoryChange = (event: { target: { value: string } }) => {
+    setSelectedCategory(event.target.value);
+  };
+
+  useEffect(() => {
+    getStolenItemCategories().then((result) => {
+      setCategories(result);
+    });
+  }, []);
+
+  const addItemForm = (
+    <Grid container>
+      <form noValidate autoComplete="off">
+        <Grid container item>
+          <Grid item xs={12}>
+            <TextInput
+              register={register("title", {
+                required: true,
+                minLength: 1,
+              })}
+              type="text"
+              name="name"
+              rows={1}
+              isRequired
+            />
+            <TextInput
+              register={register("description", {
+                required: true,
+                minLength: 1,
+              })}
+              type="text"
+              name="Description"
+              rows={5}
+              isRequired
+            />
+            <TextInput
+              register={register("location", {
+                required: true,
+                minLength: 1,
+              })}
+              type="text"
+              name="Location"
+              rows={1}
+              isRequired
+            />
+            <TextInput
+              register={register("color", {
+                required: true,
+                minLength: 1,
+              })}
+              type="text"
+              name="Color"
+              rows={1}
+              isRequired
+            />
+            <TextInput
+              register={register("size", {
+                required: true,
+                minLength: 1,
+              })}
+              type="text"
+              name="Size"
+              rows={1}
+              isRequired
+            />
+            <TextInput
+              register={register("serialNumber", {
+                required: true,
+                minLength: 1,
+              })}
+              type="text"
+              name="Serial Number"
+              rows={1}
+              isRequired
+            />
+            <TextInput
+              register={register("size", {
+                required: true,
+                minLength: 1,
+              })}
+              type="text"
+              name="Size"
+              rows={1}
+            />
+            <SelectInput
+              handleChange={handleCategoryChange}
+              value={selectedCategory}
+              filterProperties={{ name: "Categorie", options: categories }}
+            />
+          </Grid>
+        </Grid>
+        <Grid container item>
+          <Button
+            type="submit"
+            sx={{
+              backgroundColor: "#000000",
+              width: "100%",
+              margin: "20px 0 0",
+              height: "35px",
+              color: "white",
+              borderRadius: "3px",
+              textTransform: "none",
+              "&:hover": {
+                backgroundColor: "#000000",
+              },
+            }}
+            onClick={handleSubmit(onSubmit)}
+          >
+            Publica Anunt
+          </Button>
+        </Grid>
+      </form>
+    </Grid>
+  );
+  return (
+    <Grid>
+      <Box component="h3">Publica un obiect furat</Box>
+      {addItemForm}
+    </Grid>
+  );
+};
+export default AddAnnouncement;

@@ -1,86 +1,33 @@
 import React from "react";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
-import { Box, SxProps, Theme, useTheme } from "@mui/material";
+import { FormControl, InputLabel } from "@mui/material";
 import { IFilterProperties } from "../../../interfaces";
 
-const styles = (theme: Theme): Record<string, SxProps | undefined> => ({
-  filter: {
-    height: "100%",
-    borderRadius: "6px",
-    border: 0,
-    width: "150px",
-    fontSize: "14px",
-    backgroundColor: "#FFFFFF",
-    outline: "none",
-    "& .MuiSelect-select": {
-      height: "100%",
-      padding: "29px 28px 0 15px",
-      [theme.breakpoints.down("md")]: {
-        padding: "0 10px 0 15px",
-        display: "flex",
-      },
-      alignItems: "center",
-      "&:focus": {
-        backgroundColor: "transparent",
-      },
-    },
-    "& .MuiSelect-icon": {
-      right: "5px",
-    },
-    "&::placeholder": {
-      color: "#909090",
-      fontSize: "14px",
-    },
-    // "&::-webkit-outer-spin-button, &::-webkit-inner-spin-button": {
-    //   "-webkit-appearance": "none",
-    //   display: "none",
-    // },
-  },
-  input: {
-    width: "100%",
-    height: "48px",
-    float: "left",
-    border: "1px solid #DDDDDD",
-    fontSize: "14px",
-    borderRadius: "6px",
-    display: "flex",
-    padding: "0",
-    backgroundColor: "#FFFFFF",
-  },
-  colorPlaceHolder: {
-    color: "#909090",
-  },
-});
-
 const SelectInput = (props: {
-  type: string;
   handleChange: any;
   value: string;
   filterProperties: IFilterProperties;
 }) => {
-  const { type, handleChange, value, filterProperties } = props;
-  const theme = useTheme();
-  const classes = styles(theme);
+  const { handleChange, value, filterProperties } = props;
 
   return (
-    <Box sx={classes.input}>
+    <FormControl fullWidth>
+      <InputLabel id="demo-simple-select-label">
+        {filterProperties.name}
+      </InputLabel>
       <Select
-        variant="standard"
-        name={type}
-        disableUnderline
-        onChange={handleChange}
+        labelId="demo-simple-select-label"
+        id="demo-simple-select"
         value={value}
-        sx={classes.filter}
-        placeholder={type}
+        label={filterProperties.name}
+        onChange={handleChange}
       >
-        {filterProperties.options!.map((option: any) => (
-          <MenuItem key={option} value={option}>
-            {option}
-          </MenuItem>
+        {filterProperties.options?.map((filterOption) => (
+          <MenuItem value={filterOption.id}>{filterOption.name}</MenuItem>
         ))}
       </Select>
-    </Box>
+    </FormControl>
   );
 };
 

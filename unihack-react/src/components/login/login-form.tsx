@@ -1,8 +1,8 @@
 import React from "react";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
-import { FormState, UseFormRegister } from "react-hook-form/dist/types/form";
-import TextInput from "../common/text-input";
+import { UseFormRegister } from "react-hook-form/dist/types/form";
+import TextInput from "../common/inputs/text-input";
 import { Box, SxProps } from "@mui/material";
 import { IUser } from "../../interfaces/user";
 
@@ -30,14 +30,13 @@ const styles = (): Record<string, SxProps | undefined> => ({
 interface IProps {
   handleSubmit: () => void;
   register: UseFormRegister<IUser>;
-  formState: FormState<IUser>;
   buttonText: string;
   message?: string;
 }
 
 const LoginForm: React.FC<IProps> = (props) => {
   const classes = styles();
-  const { register, handleSubmit, formState, buttonText, message } = props;
+  const { register, handleSubmit, buttonText, message } = props;
 
   return (
     <Grid container>
@@ -46,8 +45,6 @@ const LoginForm: React.FC<IProps> = (props) => {
           <h2 style={{ alignSelf: "center" }}>Login</h2>
           <Grid item xs={12} sx={{ alignSelf: "center" }}>
             <TextInput
-              errors={formState.errors}
-              formState={formState}
               register={register("email", {
                 required: true,
                 minLength: 3,
@@ -58,8 +55,6 @@ const LoginForm: React.FC<IProps> = (props) => {
               isRequired
             />
             <TextInput
-              errors={formState.errors}
-              formState={formState}
               register={register("password", {
                 required: true,
                 minLength: 1,

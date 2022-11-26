@@ -3,14 +3,13 @@ import { parseJwt } from "./parsers-helpers";
 
 export const checkIfLoggedIn = (): boolean => {
   const cookies = new Cookies();
-  const loggedIn = !!cookies.get(`userToken`);
-  return loggedIn;
+  const isLoggedIn = cookies.get(`userToken`) !== "";
+  return isLoggedIn;
 };
 
 export const getUsername = (): string => {
   const cookies = new Cookies();
   const parsedToken = parseJwt(cookies.get("userToken"));
-  console.log(parsedToken);
   return parsedToken.email;
 };
 

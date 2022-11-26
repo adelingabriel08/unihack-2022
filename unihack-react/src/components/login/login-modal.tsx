@@ -15,7 +15,7 @@ const LoginModal: React.FC<IProps> = ({ toggleLoginForm, open }) => {
   const [message, setMessage] = useState("");
   const cookies = new Cookies();
 
-  const { register, handleSubmit, formState, reset } = useForm<IUser>({
+  const { register, handleSubmit, reset } = useForm<IUser>({
     mode: "all",
   });
 
@@ -46,7 +46,6 @@ const LoginModal: React.FC<IProps> = ({ toggleLoginForm, open }) => {
         <LoginForm
           handleSubmit={handleSubmit(onSubmit)}
           register={register}
-          formState={formState}
           buttonText={"login"}
           message={message}
         />
