@@ -9,6 +9,7 @@ import ItemPage from "./item";
 import AddItemPage from "./addItem";
 import { checkIfLoggedIn } from "../helpers/auth-helpers";
 import Contact from "./contact";
+import HeatMap from "../components/map/heat-map";
 
 function App() {
   const isLoggedIn = checkIfLoggedIn();
@@ -30,6 +31,7 @@ function App() {
           <Route path="*" element={<Navigate to="/" />} />
           <Route path="item/:id" element={<ItemPage />} />
           <Route path="contact" element={<Contact />} />
+          <Route path="heatMap" element={<HeatMap />} />
           <Route
             path="add/item"
             element={isLoggedIn ? <AddItemPage /> : <Navigate to="/" />}
