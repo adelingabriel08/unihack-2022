@@ -17,9 +17,9 @@ namespace Unihack.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Upload(IFormFile file)
+        public async Task<IActionResult> Upload(IFormFile data)
         {
-            return Ok(await _fileService.Upload(file));
+            return Ok(await _fileService.Upload(data));
         }
     }
 }

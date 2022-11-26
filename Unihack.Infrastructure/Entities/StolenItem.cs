@@ -12,5 +12,7 @@ namespace Unihack.Infrastructure.Entities
         public string? Size { get; set; }
         public string? FileUrl { get; set; }
         public StolenItemType? StolenItemType { get; set; }
+        public string? UserId { get; set; }
+        public ApplicationUser? User { get; set; }
     }
 }

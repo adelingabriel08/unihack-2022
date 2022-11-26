@@ -20,5 +20,6 @@ namespace Unihack.Core.ViewModels
         public string FileUrl { get; set; }
         public DateTime CreatedTimeUTC { get; set; }
         public StolenItemType StolenItemType { get; set; }
+        public UserViewModel User { get; set; }
     }
 }

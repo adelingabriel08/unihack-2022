@@ -1,4 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using Unihack.Core.Contracts;
 using Unihack.Core.Exceptions;
 using Unihack.Core.Requests;
@@ -12,11 +16,15 @@ namespace Unihack.Core.Services
     {
         private readonly IRepository<StolenItem> _stolenItemRepository;
         private readonly IRepository<StolenItemType> _stolenItemTypeRepository;
+        private readonly IHttpContextAccessor _contextAccessor;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public StolenItemService(IRepository<StolenItem> stolenItemRepository, IRepository<StolenItemType> stolenItemTypeRepository)
+        public StolenItemService(IRepository<StolenItem> stolenItemRepository, IRepository<StolenItemType> stolenItemTypeRepository, IHttpContextAccessor contextAccessor, UserManager<ApplicationUser> userManager)
         {
             _stolenItemRepository = stolenItemRepository;
             _stolenItemTypeRepository = stolenItemTypeRepository;
+            _contextAccessor = contextAccessor;
+            _userManager = userManager;
         }
 
         public async Task<StolenItemViewModel> AddStolenItem(AddStolenItemRequest request)
@@ -50,7 +58,8 @@ namespace Unihack.Core.Services
                 SerialNumber = request.SerialNumber,
                 Location = request.Location,
                 Color = request.Color,
-                FileUrl = request.FileUrl
+                FileUrl = request.FileUrl,
+                User = await _userManager.FindByEmailAsync(_contextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Email))
             };
             var entity = await _stolenItemRepository.CreateAsync(item);
 
@@ -59,14 +68,14 @@ namespace Unihack.Core.Services
 
         public async Task<StolenItemViewModel> GetStolenItem(int id)
         {
-            var item = await _stolenItemRepository.GetByIdAsync(id, q => q.Include(p => p.StolenItemType));
+            var item = await _stolenItemRepository.GetByIdAsync(id, q => q.Include(p => p.StolenItemType).Include(p => p.User));
             if (item is null) return null;
             return GetViewModel(item);
         }
 
         public async Task<List<StolenItemViewModel>> GetStolenItems(int skip = 0, int take = 0)
         {
-            var items = await _stolenItemRepository.GetAsync(skip, take, q => q.Include(p => p.StolenItemType));
+            var items = await _stolenItemRepository.GetAsync(skip, take, q => q.Include(p => p.StolenItemType).Include(p => p.User));
             List<StolenItemViewModel> vms = new List<StolenItemViewModel>();
             
             foreach(var item in items)
@@ -99,7 +108,8 @@ namespace Unihack.Core.Services
                 Color = item.Color,
                 StolenItemType = item.StolenItemType,
                 CreatedTimeUTC = item.CreatedTimeUtc,
-                FileUrl = item.FileUrl
+                FileUrl = item.FileUrl,
+                User =  item.User != null ? new UserViewModel () { Email = item.User.Email, FirstName = item.User.FirstName, LastName = item.User.LastName , PhoneNumber = item.User.PhoneNumber } : null
             };
             return vm;
         }
