@@ -35,7 +35,6 @@ const FilterBar = () => {
   };
   const handleSearchChange = (event: { target: { value: string } }) => {
     setsearchValue(event?.target.value);
-    console.log(event.target.value);
   };
 
   useEffect(() => {
@@ -44,7 +43,6 @@ const FilterBar = () => {
 
   useEffect(() => {
     getStolenTypes().then((result) => {
-      console.log(result);
       setCategories(result);
     });
   }, []);

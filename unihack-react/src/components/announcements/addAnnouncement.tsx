@@ -2,7 +2,11 @@ import { Box, Button, Grid } from "@mui/material";
 import react, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { IFilterOption, IItem } from "../../interfaces";
-import { getStolenItemCategories } from "../../utils/api-service";
+import {
+  getStolenItemCategories,
+  insertStolenItem,
+} from "../../utils/api-service";
+import ImageUpload from "../common/inputs/image-input";
 import SelectInput from "../common/inputs/select-input";
 import TextInput from "../common/inputs/text-input";
 
@@ -11,11 +15,15 @@ const AddAnnouncement = () => {
     mode: "all",
   });
   const [selectedCategory, setSelectedCategory] = useState("");
+  const [imgUrl, setImgUrl] = useState("");
   const [categories, setCategories] = useState<IFilterOption[]>([]);
   const onSubmit = async (data: IItem) => {
     try {
-      console.log(data);
-      console.log(selectedCategory);
+      insertStolenItem({
+        ...data,
+        stolenItemTypeId: parseInt(selectedCategory),
+        fileUrl: imgUrl,
+      });
     } catch (e: any) {
       console.log(e);
     }
@@ -139,6 +147,8 @@ const AddAnnouncement = () => {
   return (
     <Grid>
       <Box component="h3">Publica un obiect furat</Box>
+      <ImageUpload setImgUrl={setImgUrl} />
+
       {addItemForm}
     </Grid>
   );

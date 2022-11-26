@@ -5,7 +5,6 @@ import ItemComponent from "../components/announcements/item";
 
 const ItemPage = () => {
   const { id } = useParams();
-  console.log(id);
   return (
     <Grid container>
       <ItemComponent id={parseInt(id || "")} />

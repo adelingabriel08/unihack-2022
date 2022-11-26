@@ -1,6 +1,5 @@
 import React from "react";
 import TextField from "@mui/material/TextField";
-import { MenuItem } from "@mui/material";
 
 interface ITextInputProps {
   type: string;
@@ -14,23 +13,14 @@ interface ITextInputProps {
 }
 
 const TextInput: React.FC<ITextInputProps> = (props) => {
-  const {
-    type,
-    register,
-    name,
-    rows,
-    onChange,
-    defaultValue,
-    isRequired,
-    selectValues,
-  } = props;
+  const { type, register, name, rows, onChange, defaultValue, isRequired } =
+    props;
 
   const handleChange = (event: { target: { value: any } }) => {
     if (onChange) {
       onChange(event.target.value);
     }
   };
-  console.log(selectValues);
 
   return (
     <TextField
@@ -44,6 +34,7 @@ const TextInput: React.FC<ITextInputProps> = (props) => {
       multiline={rows > 1}
       onChange={handleChange}
       required={isRequired}
+      sx={{ margin: "10px" }}
     />
   );
 };
