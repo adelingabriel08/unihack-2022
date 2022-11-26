@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+using Unihack.Core.Requests;
 using Unihack.Core.ViewModels;
 
 namespace Unihack.Core.Contracts
@@ -11,6 +8,7 @@ namespace Unihack.Core.Contracts
     {
         Task<List<StolenItemViewModel>> GetStolenItems(int skip = 0, int take = 0);
         Task<StolenItemViewModel> GetStolenItem(int id);
-        Task<StolenItemViewModel> AddStolenItem(int id);
+        Task<StolenItemViewModel> AddStolenItem(AddStolenItemRequest request);
+        Task<List<StolenItemTypeViewModel>> GetTypes();
     }
 }
