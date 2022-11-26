@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Grid from "@mui/material/Grid";
 import { useState } from "react";
 import Cookies from "universal-cookie";
@@ -9,6 +9,7 @@ import { useMediaQuery } from "@mui/material";
 import MobileMenu from "./mobile-menu";
 import { SxProps } from "@mui/material/styles";
 import LoginModal from "../login/login-modal";
+import { getUsername } from "../../helpers/auth-helpers";
 
 const styles = (): Record<string, SxProps | undefined> => ({
   bar: {
@@ -49,12 +50,12 @@ const Header = () => {
   const classes = styles();
   const [isOpenLogin, setIsOpenLogin] = useState(false);
   const isDesktop = useMediaQuery("(min-width:600px)");
-  const cookies = new Cookies();
-  const username = cookies.get(`username`);
+  const username = getUsername();
 
   const toggleLoginForm = () => {
     setIsOpenLogin(!isOpenLogin);
   };
+  useEffect(() => {}, []);
 
   return (
     <Grid

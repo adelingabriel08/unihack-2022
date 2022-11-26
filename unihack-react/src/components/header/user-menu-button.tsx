@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Grid from "@mui/material/Grid";
 import { Box, Button, ClickAwayListener, SxProps } from "@mui/material";
 import ExpandIcon from "../common/expand-icon";
+import { handleLogout } from "../../helpers/auth-helpers";
 
 const styles = (): Record<string, SxProps | undefined> => ({
   menu: {
@@ -51,9 +52,6 @@ const UserMenuButton: React.FC<IProps> = ({ username }) => {
   };
   const closeUserMenu = () => {
     setIsOpenUseMenu(false);
-  };
-  const handleLogout = () => {
-    // do logout
   };
 
   return (

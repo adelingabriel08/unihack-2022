@@ -13,7 +13,7 @@ const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: "Jost,Franklin,Tahoma,Arial",
+    fontFamily: "Arial",
     fontSize: 16,
     allVariants: {
       color: "#000",

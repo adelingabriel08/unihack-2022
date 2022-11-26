@@ -6,9 +6,9 @@ import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import { SxProps } from "@mui/material/styles";
 import Collapse from "@mui/material/Collapse";
 import { Link } from "react-router-dom";
-import Cookies from "universal-cookie";
 import Box from "@mui/material/Box";
 import LoginModal from "../login/login-modal";
+import { getUsername, handleLogout } from "../../helpers/auth-helpers";
 
 const styles = (): Record<string, SxProps | undefined> => ({
   menuIcon: {
@@ -61,10 +61,10 @@ const styles = (): Record<string, SxProps | undefined> => ({
 
 const MobileHeader = () => {
   const classes = styles();
-  const cookies = new Cookies();
   const [isOpenLogin, setIsOpenLogin] = useState(false);
-  const username = cookies.get(`username`);
+  const username = getUsername();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const isLoggedIn = !!getUsername();
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
@@ -106,6 +106,23 @@ const MobileHeader = () => {
             </Link>
           </Box>
         </Grid>
+        {!isLoggedIn ? (
+          <Grid item sx={classes.menuItem}>
+            <Box sx={classes.link}>
+              <Link onClick={toggleLoginForm} to="/">
+                Conecteaza-te
+              </Link>
+            </Box>
+          </Grid>
+        ) : (
+          <Grid item sx={classes.menuItem}>
+            <Box sx={classes.link}>
+              <Link onClick={handleLogout} to="/">
+                Deconecteaza-te
+              </Link>
+            </Box>
+          </Grid>
+        )}
       </Collapse>
       <LoginModal open={isOpenLogin} toggleLoginForm={toggleLoginForm} />
     </>

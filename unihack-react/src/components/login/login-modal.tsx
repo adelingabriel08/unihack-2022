@@ -21,19 +21,12 @@ const LoginModal: React.FC<IProps> = ({ toggleLoginForm, open }) => {
 
   const onSubmit = async (data: IUser) => {
     try {
-      const { token, username, role } = await login(data);
+      const token = await login(data);
       cookies.set("userToken", token, {
         path: "/",
         sameSite: "strict",
       });
-      cookies.set("username", username, {
-        path: "/",
-        sameSite: "strict",
-      });
-      cookies.set("userRole", role, {
-        path: "/",
-        sameSite: "strict",
-      });
+
       handleModalClose();
       window.location.reload();
     } catch (e: any) {

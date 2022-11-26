@@ -48,10 +48,8 @@ const LoginForm: React.FC<IProps> = (props) => {
             <TextInput
               errors={formState.errors}
               formState={formState}
-              register={register("username", {
+              register={register("email", {
                 required: true,
-                pattern:
-                  /^[a-zA-Z0-9]([._-](?![._-])|[a-zA-Z0-9]){1,18}[a-zA-Z0-9]$/,
                 minLength: 3,
               })}
               type="text"
@@ -64,8 +62,6 @@ const LoginForm: React.FC<IProps> = (props) => {
               formState={formState}
               register={register("password", {
                 required: true,
-                pattern:
-                  /^[a-zA-Z0-9]([._-](?![._-])|[a-zA-Z0-9]){1,18}[a-zA-Z0-9]$/,
                 minLength: 1,
               })}
               type="password"

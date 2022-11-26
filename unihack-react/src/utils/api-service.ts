@@ -1,8 +1,6 @@
 import axios from "axios";
 import { IUser } from "../interfaces";
 
-const getApiHost = (): string => process.env.BACKEND_URL || "";
-
 const sendRequest = (
   method: "get" | "post" | "patch" | "delete",
   url: string,
@@ -33,8 +31,13 @@ const sendAuthRequest = (
   });
 
 export const login = async (params: IUser) => {
-  const result = await sendRequest("post", `${getApiHost()}/api/auth/login`, {
-    ...params,
-  });
+  const result = await sendRequest(
+    "post",
+    `https://unihack-api.azurewebsites.net/api/auth/login`,
+    {
+      ...params,
+    }
+  );
+
   return result.data;
 };
