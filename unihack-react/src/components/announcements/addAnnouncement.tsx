@@ -126,9 +126,9 @@ const AddAnnouncement = () => {
             type="submit"
             sx={{
               backgroundColor: "#000000",
-              width: "100%",
-              margin: "20px 0 0",
-              height: "35px",
+              width: "150px",
+              margin: "10px",
+              height: "45px",
               color: "white",
               borderRadius: "3px",
               textTransform: "none",
@@ -145,10 +145,9 @@ const AddAnnouncement = () => {
     </Grid>
   );
   return (
-    <Grid>
+    <Grid sx={{ paddingBottom: "50px" }}>
       <Box component="h3">Publica un obiect furat</Box>
       <ImageUpload setImgUrl={setImgUrl} />
-
       {addItemForm}
     </Grid>
   );

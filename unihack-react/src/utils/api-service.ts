@@ -47,10 +47,8 @@ const sendAuthRequest = (
     url: url,
     ...(data && { data }),
     headers: {
-      // Accept: "application/json",
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
-      // "Content-Type": "multipart/form-data",
     },
   });
 };
@@ -130,5 +128,17 @@ export const insertStolenItem = async (item: any) => {
     token,
     JSON.stringify(item)
   );
+  return result.data;
+};
+
+export const getSimilatObjects = async (id: number) => {
+  const cookies = new Cookies();
+  const token = cookies.get("userToken");
+  const result = await sendAuthRequest(
+    "post",
+    `https://unihack-api.azurewebsites.net/api/stolenitems/adverts/${id}`,
+    token
+  );
+
   return result.data;
 };

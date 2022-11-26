@@ -12,7 +12,7 @@ const SelectInput = (props: {
   const { handleChange, value, filterProperties } = props;
 
   return (
-    <FormControl fullWidth>
+    <FormControl fullWidth style={{ margin: "10px" }}>
       <InputLabel id="demo-simple-select-label">
         {filterProperties.name}
       </InputLabel>

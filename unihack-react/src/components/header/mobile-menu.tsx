@@ -101,7 +101,7 @@ const MobileHeader = () => {
 
         <Grid item sx={classes.menuItem}>
           <Box sx={classes.link}>
-            <Link onClick={() => setIsMenuOpen(false)} to="/">
+            <Link onClick={() => setIsMenuOpen(false)} to="/contact">
               Contact
             </Link>
           </Box>

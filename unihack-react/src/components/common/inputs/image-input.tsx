@@ -1,3 +1,4 @@
+import { Box } from "@mui/material";
 import { uploadImageService } from "../../../utils/api-service";
 
 interface IProps {
@@ -14,6 +15,22 @@ const ImageUpload = (props: IProps) => {
     }
   };
 
-  return <input type="file" onChange={handleChange} />;
+  return (
+    <Box
+      sx={{
+        'input[type="file" i]': {
+          margin: "10px",
+          height: "55px",
+          borderRadius: "6px",
+          border: "1px solid #ccc",
+          display: "inline-block",
+          padding: "6px 12px",
+          cursor: "pointer",
+        },
+      }}
+    >
+      <input type="file" onChange={handleChange} />
+    </Box>
+  );
 };
 export default ImageUpload;

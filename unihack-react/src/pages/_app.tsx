@@ -8,6 +8,7 @@ import Layout from "../components/layout";
 import ItemPage from "./item";
 import AddItemPage from "./addItem";
 import { checkIfLoggedIn } from "../helpers/auth-helpers";
+import Contact from "./contact";
 
 function App() {
   const isLoggedIn = checkIfLoggedIn();
@@ -28,6 +29,7 @@ function App() {
 
           <Route path="*" element={<Navigate to="/" />} />
           <Route path="item/:id" element={<ItemPage />} />
+          <Route path="contact" element={<Contact />} />
           <Route
             path="add/item"
             element={isLoggedIn ? <AddItemPage /> : <Navigate to="/" />}

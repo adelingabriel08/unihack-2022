@@ -73,7 +73,7 @@ const Header = () => {
               <Link to="/">Home</Link>
             </Grid>
             <Grid item sx={classes.link}>
-              <Link to="/">Contact</Link>
+              <Link to="/contact">Contact</Link>
             </Grid>
             {username && (
               <Grid item sx={classes.link}>
