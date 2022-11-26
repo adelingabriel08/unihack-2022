@@ -49,7 +49,8 @@ namespace Unihack.Core.Services
                 Description = request.Description,
                 SerialNumber = request.SerialNumber,
                 Location = request.Location,
-                Color = request.Color
+                Color = request.Color,
+                FileUrl = request.FileUrl
             };
             var entity = await _stolenItemRepository.CreateAsync(item);
 
@@ -96,7 +97,9 @@ namespace Unihack.Core.Services
                 SerialNumber = item.SerialNumber,
                 Location = item.Location,
                 Color = item.Color,
-                StolenItemType = item.StolenItemType
+                StolenItemType = item.StolenItemType,
+                CreatedTimeUTC = item.CreatedTimeUtc,
+                FileUrl = item.FileUrl
             };
             return vm;
         }

@@ -10,6 +10,7 @@ namespace Unihack.Infrastructure.Entities
         public string? Location { get; set; }
         public string? Color { get; set; }
         public string? Size { get; set; }
+        public string? FileUrl { get; set; }
         public StolenItemType? StolenItemType { get; set; }
     }
 }

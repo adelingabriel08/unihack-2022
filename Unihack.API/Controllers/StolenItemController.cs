@@ -6,7 +6,7 @@ using Unihack.Core.Requests;
 namespace Unihack.API.Controllers
 {
     [ApiController]
-    [Route("stolenitems")]
+    [Route("api/stolenitems")]
     public class StolenItemController : ControllerBase
     {
         private readonly IStolenItemService _itemService;

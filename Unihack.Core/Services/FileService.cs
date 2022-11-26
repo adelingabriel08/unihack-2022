@@ -20,13 +20,13 @@ namespace Unihack.Core.Services
         public async Task<string> Upload(IFormFile file)
         {
             string containerName = _azureStorageOptions.ContainerName;
-            string azureStorageConnectionString = _azureStorageOptions.ConnectionString;
+            string azureStorageConnectionString = _azureStorageOptions.ConnectionString;    
             var containerClient = new BlobContainerClient(azureStorageConnectionString, containerName);
-
+            await containerClient.CreateIfNotExistsAsync();
             var stream = new MemoryStream();
             await file.CopyToAsync(stream);
             stream.Position = 0;
-            var fileName = file.FileName + Guid.NewGuid().ToString().Substring(0, 6);
+            var fileName = Path.GetFileNameWithoutExtension(file.FileName)+ "-" + Guid.NewGuid().ToString().Substring(0, 6);
             var extension = Path.GetExtension(file.FileName)?.Substring(1).ToLower();
             BlobClient blobClient = containerClient.GetBlobClient(fileName + "." + extension);
             await blobClient.UploadAsync(stream);

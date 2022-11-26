@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Unihack.Infrastructure.Entities;
+﻿
 
 namespace Unihack.Core.Requests
 {
@@ -17,5 +12,6 @@ namespace Unihack.Core.Requests
         public string? Location { get; set; }
         public string? Color { get; set; }
         public string? Size { get; set; }
+        public string? FileUrl { get; set; }
     }
 }
