@@ -20,6 +20,7 @@ namespace Unihack.Infrastructure.Repositories
 
         public async Task<T> CreateAsync(T entity)
         {
+            entity.CreatedTimeUtc = DateTime.UtcNow;
             var result = await _dbContext.Set<T>().AddAsync(entity);
             await _dbContext.SaveChangesAsync();
             return result.Entity;
