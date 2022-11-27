@@ -56,7 +56,7 @@ const Announcements: React.FC<IProps> = (props) => {
             justifyContent="center"
           >
             <Box
-              sx={{ margin: "5px" }}
+              sx={{ margin: "5px", maxWidth: "160px" }}
               height="152px"
               component="img"
               alt="bicicleta"
