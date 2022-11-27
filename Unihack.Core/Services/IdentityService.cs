@@ -59,6 +59,9 @@ namespace Unihack.Core.Services
             if (string.IsNullOrWhiteSpace(model.LastName))
                 throw new ValidationException("Please provide a lastname!");
 
+            if (string.IsNullOrWhiteSpace(model.PhoneNumber))
+                throw new ValidationException("Please provide a phone number!");
+
             var user = await _userManager.FindByEmailAsync(model.Email);
             if (user != null)
                 return await Login(new LoginViewModel() { Email = model.Email, Password = model.Password });
@@ -69,7 +72,8 @@ namespace Unihack.Core.Services
                 LastName = model.LastName,
                 Email = model.Email,
                 UserName = model.Email,
-                EmailConfirmed = true
+                EmailConfirmed = true,
+                PhoneNumber = model.PhoneNumber
             };
             var result = await _userManager.CreateAsync(user, model.Password);
 

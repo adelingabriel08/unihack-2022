@@ -51,6 +51,7 @@ builder.Services.Configure<JwtOptions>(
 var jwtOptions = new JwtOptions();
 builder.Configuration.Bind(nameof(jwtOptions), jwtOptions);
 builder.Services.Configure<AzureStorageOptions>(builder.Configuration.GetSection(nameof(AzureStorageOptions)));
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(name: "CorsPolicy",

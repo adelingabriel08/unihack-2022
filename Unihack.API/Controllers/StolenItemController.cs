@@ -10,10 +10,12 @@ namespace Unihack.API.Controllers
     public class StolenItemController : ControllerBase
     {
         private readonly IStolenItemService _itemService;
+        private readonly IScrapingService _scrapingService;
 
-        public StolenItemController(IStolenItemService itemService)
+        public StolenItemController(IStolenItemService itemService, IScrapingService scrapingService)
         {
             _itemService = itemService;
+            _scrapingService = scrapingService;
         }
 
         [HttpGet]
@@ -43,6 +45,13 @@ namespace Unihack.API.Controllers
         public async Task<IActionResult> GetStolenItemTypes()
         {
             return Ok(await _itemService.GetTypes());
+        }
+
+        [Authorize]
+        [HttpPost("adverts/{stolenItemId}")]
+        public async Task<IActionResult> GetSimilarAdverts(int stolenItemId)
+        {
+            return Ok(await _scrapingService.GetOlxPossibleAdverts(stolenItemId));
         }
     }
 }

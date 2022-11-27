@@ -13,6 +13,7 @@ namespace Unihack.Core.Extensions
             services.AddScoped<IIdentityService, IdentityService>();
             services.AddScoped<IStolenItemService, StolenItemService>();
             services.AddScoped<IFileService, FileService>();
+            services.AddScoped<IScrapingService, ScrapingService>();
             return services;
         }
     }
