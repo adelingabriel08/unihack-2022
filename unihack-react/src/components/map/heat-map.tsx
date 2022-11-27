@@ -1,38 +1,21 @@
-import React, { useState } from "react";
-import { GoogleMap, InfoWindow, Marker } from "@react-google-maps/api";
+import React from "react";
+import { GoogleMap, Marker } from "@react-google-maps/api";
 
 const markers = [
   {
-    id: 1,
+    id: 1000,
     name: "Chicago, Illinois",
-    position: { lat: 41.881832, lng: -87.623177 },
+    position: { lat: 45.760762909219224, lng: 21.225275850772704 },
   },
   {
     id: 2,
-    name: "Denver, Colorado",
-    position: { lat: 39.739235, lng: -104.99025 },
-  },
-  {
-    id: 3,
-    name: "Los Angeles, California",
-    position: { lat: 34.052235, lng: -118.243683 },
-  },
-  {
-    id: 4,
-    name: "New York, New York",
-    position: { lat: 40.712776, lng: -74.005974 },
+    name: "Tm, Illinois",
+    position: { lat: 45.720760909219524, lng: 21.225275850772704 },
   },
 ];
 
 function HeatMapComponent() {
-  const [activeMarker, setActiveMarker] = useState(null);
   const google = window.google;
-  const handleActiveMarker = (marker: any) => {
-    if (marker === activeMarker) {
-      return;
-    }
-    setActiveMarker(marker);
-  };
 
   const handleOnLoad = (map: any) => {
     const bounds = new google.maps.LatLngBounds();
@@ -40,24 +23,19 @@ function HeatMapComponent() {
     map.fitBounds(bounds);
   };
 
+  const onLoad = (marker: any) => {
+    console.log("marker: ", marker);
+  };
+
   return (
     <GoogleMap
       onLoad={handleOnLoad}
-      onClick={() => setActiveMarker(null)}
       mapContainerStyle={{ width: "100vw", height: "100vh" }}
     >
-      {markers.map(({ id, name, position }) => (
-        <Marker
-          key={id}
-          position={position}
-          onClick={() => handleActiveMarker(id)}
-        >
-          {activeMarker === id ? (
-            <InfoWindow onCloseClick={() => setActiveMarker(null)}>
-              <div>{name}</div>
-            </InfoWindow>
-          ) : null}
-        </Marker>
+      {markers.map((marker) => (
+        <React.Fragment key={marker.id}>
+          <Marker onLoad={onLoad} position={marker.position} />
+        </React.Fragment>
       ))}
     </GoogleMap>
   );
