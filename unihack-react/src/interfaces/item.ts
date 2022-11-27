@@ -1,3 +1,5 @@
+import { IUser } from "./user";
+
 export interface IItem {
   id: number;
   title: string;
@@ -10,6 +12,7 @@ export interface IItem {
   fileUrl: string;
   createdTimeUTC: Date;
   stolenItemType: IStolenItemType;
+  user: { email: string; firstName: string; phoneNumber: string };
 }
 
 export interface IStolenItemType {

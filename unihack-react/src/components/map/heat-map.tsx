@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { GoogleMap, Marker } from "@react-google-maps/api";
+import { IItem } from "../../interfaces";
+import { getStolenItems } from "../../utils/api-service";
 
 const markers = [
   {
@@ -15,6 +17,8 @@ const markers = [
 ];
 
 function HeatMapComponent() {
+  const [items, setItems] = useState<IItem[]>([]);
+
   const google = window.google;
 
   const handleOnLoad = (map: any) => {
@@ -27,14 +31,28 @@ function HeatMapComponent() {
     console.log("marker: ", marker);
   };
 
+  useEffect(() => {
+    getStolenItems().then((result) =>
+      setItems(result.map((item: IItem) => item))
+    );
+  }, []);
+
   return (
     <GoogleMap
       onLoad={handleOnLoad}
       mapContainerStyle={{ width: "100vw", height: "100vh" }}
     >
-      {markers.map((marker) => (
-        <React.Fragment key={marker.id}>
-          <Marker onLoad={onLoad} position={marker.position} />
+      {items.map((item) => (
+        <React.Fragment key={item.id}>
+          <Marker
+            onLoad={onLoad}
+            position={
+              {
+                lat: Number(item.location.split(",")[1]),
+                lng: Number(item.location.split(",")[2]),
+              } as google.maps.LatLngLiteral
+            }
+          />
         </React.Fragment>
       ))}
     </GoogleMap>

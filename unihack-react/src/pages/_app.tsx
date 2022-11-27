@@ -31,7 +31,7 @@ function App() {
           <Route path="*" element={<Navigate to="/" />} />
           <Route path="item/:id" element={<ItemPage />} />
           <Route path="contact" element={<Contact />} />
-          <Route path="heatMap" element={<HeatMap />} />
+          <Route path="heatmap" element={<HeatMap />} />
           <Route
             path="add/item"
             element={isLoggedIn ? <AddItemPage /> : <Navigate to="/" />}

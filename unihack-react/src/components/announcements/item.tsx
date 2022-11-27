@@ -32,7 +32,8 @@ const ItemComponent = (props: IProps) => {
       </Grid>
       <Grid item xs={12} md={6}>
         <Box sx={{ fontSize: "14px", marginTop: "10px" }}>
-          {item?.location} - {item?.createdTimeUTC.toString().slice(0, 10)}
+          {item?.location.split(",")[0]} -{" "}
+          {item?.createdTimeUTC.toString().slice(0, 10)}
         </Box>
         <Box component="h2" sx={{ color: "gray" }}>
           Categorie: {item?.stolenItemType.name}
@@ -61,7 +62,7 @@ const ItemComponent = (props: IProps) => {
         </Box>
 
         <Box component="h3" sx={{ color: "red" }}>
-          Proprietar: Ion Popescu (0741547144)
+          Proprietar: {item?.user.firstName} {item?.user.phoneNumber}
         </Box>
       </Grid>
     </Grid>

@@ -75,6 +75,9 @@ const Header = () => {
             <Grid item sx={classes.link}>
               <Link to="/contact">Contact</Link>
             </Grid>
+            <Grid item sx={classes.link}>
+              <Link to="/heatmap">HeatMap</Link>
+            </Grid>
             {username && (
               <Grid item sx={classes.link}>
                 <Link to="/add/item">Adauga Obiect Furat</Link>

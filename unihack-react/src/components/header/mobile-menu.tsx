@@ -106,6 +106,13 @@ const MobileHeader = () => {
             </Link>
           </Box>
         </Grid>
+        <Grid item sx={classes.menuItem}>
+          <Box sx={classes.link}>
+            <Link onClick={() => setIsMenuOpen(false)} to="/heatmap">
+              HeatMap
+            </Link>
+          </Box>
+        </Grid>
         {!isLoggedIn ? (
           <Grid item sx={classes.menuItem}>
             <Box sx={classes.link}>

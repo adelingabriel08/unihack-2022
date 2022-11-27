@@ -105,15 +105,7 @@ const AddAnnouncement = () => {
               rows={1}
               isRequired
             />
-            <TextInput
-              register={register("size", {
-                required: true,
-                minLength: 1,
-              })}
-              type="text"
-              name="Size"
-              rows={1}
-            />
+
             <SelectInput
               handleChange={handleCategoryChange}
               value={selectedCategory}

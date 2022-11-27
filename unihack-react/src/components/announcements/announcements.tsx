@@ -70,7 +70,7 @@ const Announcements: React.FC<IProps> = (props) => {
           <Grid item xs sx={{ padding: "10px", minWidth: "300px" }}>
             <Box>{truncateText(item.title)}</Box>
             <Box sx={{ marginTop: "80px", fontSize: "16px" }}>
-              {item.location} - postat{" "}
+              {item.location.split(",")[0]} - postat{" "}
               {item.createdTimeUTC.toString().slice(0, 10)}
             </Box>
           </Grid>
