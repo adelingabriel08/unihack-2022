@@ -1,6 +1,7 @@
 import { Box, Button, Grid } from "@mui/material";
 import react, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { Navigate } from "react-router-dom";
 import { IFilterOption, IItem } from "../../interfaces";
 import {
   getStolenItemCategories,
@@ -16,6 +17,7 @@ const AddAnnouncement = () => {
   });
   const [selectedCategory, setSelectedCategory] = useState("");
   const [imgUrl, setImgUrl] = useState("");
+  const [redirectToHomePage, setredirectToHomePage] = useState(false);
   const [categories, setCategories] = useState<IFilterOption[]>([]);
   const onSubmit = async (data: IItem) => {
     try {
@@ -24,6 +26,7 @@ const AddAnnouncement = () => {
         stolenItemTypeId: parseInt(selectedCategory),
         fileUrl: imgUrl,
       });
+      setredirectToHomePage(true);
     } catch (e: any) {
       console.log(e);
     }
@@ -136,6 +139,10 @@ const AddAnnouncement = () => {
       </form>
     </Grid>
   );
+
+  if (redirectToHomePage) {
+    return <Navigate to="/" />;
+  }
   return (
     <Grid sx={{ paddingBottom: "50px" }}>
       <Box component="h3">Publica un obiect furat</Box>

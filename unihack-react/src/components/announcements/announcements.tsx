@@ -57,7 +57,7 @@ const Announcements: React.FC<IProps> = (props) => {
           >
             <Box
               sx={{ margin: "5px" }}
-              width="152px"
+              height="152px"
               component="img"
               alt="bicicleta"
               src={
